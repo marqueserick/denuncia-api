@@ -6,6 +6,11 @@ public class DenuncianteDto {
 
     private String cpf;
 
+    public DenuncianteDto(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
