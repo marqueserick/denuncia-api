@@ -1,5 +1,7 @@
 package com.marqueserick.api.denuncia.dto;
 
+import com.google.gson.JsonObject;
+
 public class Endereco {
 
     private String logradouro;
@@ -13,6 +15,19 @@ public class Endereco {
     private String pais;
 
     private String cep;
+
+    public Endereco(JsonObject enderecoJson) {
+        this.logradouro = enderecoJson.get("street").getAsString();
+        this.bairro = enderecoJson.get("adminArea6").getAsString();
+        this.cidade = enderecoJson.get("adminArea5").getAsString();
+        this.estado = enderecoJson.get("adminArea3").getAsString();
+        this.pais = enderecoJson.get("adminArea1").getAsString();
+        this.cep = enderecoJson.get("postalCode").getAsString();
+    }
+
+    public Endereco() {
+
+    }
 
     public String getLogradouro() {
         return logradouro;
