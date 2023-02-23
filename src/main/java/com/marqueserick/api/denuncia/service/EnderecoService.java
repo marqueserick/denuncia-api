@@ -2,7 +2,6 @@ package com.marqueserick.api.denuncia.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.marqueserick.api.denuncia.dto.Endereco;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +18,10 @@ import java.net.URL;
 public class EnderecoService {
 
     @Value("${endereco.service.url}")
-    String url;
+    private String url;
 
     @Value("${endereco.service.key}")
-    String key;
+    private String key;
 
     @Cacheable("endereco")
     public Endereco buscarEndereco(Double latitude, Double longitude){
