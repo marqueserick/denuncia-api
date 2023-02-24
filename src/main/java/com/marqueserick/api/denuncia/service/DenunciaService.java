@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.marqueserick.api.denuncia.utils.Util.enderecoValido;
+import static com.marqueserick.api.denuncia.utils.Util.validarCpf;
 
 @Service
 public class DenunciaService {
@@ -68,10 +69,11 @@ public class DenunciaService {
     }
 
     private Denunciante buscarDenunciante(DenuncianteDto denuncianteDto){
-        Optional<Denunciante> denunciante = denuncianteRepository.findByCpf(denuncianteDto.getCpf());
+        String cpf = validarCpf(denuncianteDto.getCpf());
+        Optional<Denunciante> denunciante = denuncianteRepository.findByCpf(cpf);
         if(denunciante.isPresent()) return denunciante.get();
 
-        Denunciante d = new Denunciante(denuncianteDto.getNome(), denuncianteDto.getCpf());
+        Denunciante d = new Denunciante(denuncianteDto.getNome(), cpf);
         denuncianteRepository.save(d);
         return d;
     }
