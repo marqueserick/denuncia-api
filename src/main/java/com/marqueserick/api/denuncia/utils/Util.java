@@ -4,19 +4,7 @@ import com.marqueserick.api.denuncia.dto.Endereco;
 import com.marqueserick.api.denuncia.infra.exception.Erro;
 import org.springframework.http.HttpStatus;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
 public class Util {
-
-    public static String converterParaString(BufferedReader br) throws IOException {
-        String json="", linha;
-        while((linha = br.readLine()) != null){
-            json += linha;
-        }
-
-        return json;
-    }
 
     public static boolean enderecoValido(Endereco endereco){
         return endereco.getPais() != null && !endereco.getPais().isEmpty()

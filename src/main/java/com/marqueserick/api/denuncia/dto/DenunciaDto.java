@@ -2,7 +2,6 @@ package com.marqueserick.api.denuncia.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.marqueserick.api.denuncia.model.Denuncia;
-import com.marqueserick.api.denuncia.model.Denunciante;
 
 public class DenunciaDto {
 
