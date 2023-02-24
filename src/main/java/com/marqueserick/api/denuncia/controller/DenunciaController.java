@@ -2,6 +2,7 @@ package com.marqueserick.api.denuncia.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.marqueserick.api.denuncia.dto.DenunciaDto;
+import com.marqueserick.api.denuncia.dto.Resposta;
 import com.marqueserick.api.denuncia.dto.Views;
 import com.marqueserick.api.denuncia.service.DenunciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class DenunciaController {
     private DenunciaService service;
 
     @PostMapping
-    public ResponseEntity<DenunciaDto> novaDenuncia(@RequestBody @JsonView(value = Views.Requisicao.class) DenunciaDto denuncia){
-        return new ResponseEntity(service.novaDenuncia(denuncia), HttpStatus.CREATED);
+    public ResponseEntity<Resposta> novaDenuncia(@RequestBody @JsonView(value = Views.Requisicao.class) DenunciaDto denuncia){
+        return new ResponseEntity(new Resposta(service.novaDenuncia(denuncia)), HttpStatus.CREATED);
     }
 
 
