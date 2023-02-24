@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.marqueserick.api.denuncia.dto.Endereco;
+import com.marqueserick.api.denuncia.infra.exception.Erro;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,8 @@ public class EnderecoService {
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
             conexao.connect();
 
-            if(conexao.getResponseCode() != HttpStatus.OK.value()) throw new RuntimeException();
+            if(conexao.getResponseCode() != HttpStatus.OK.value()) throw new Erro("Endereço não encontrado para essa localidade",
+                    "02", HttpStatus.valueOf(conexao.getResponseCode()));
 
             JsonParser jp = new JsonParser();
             JsonElement jsonElement = jp.parse(new InputStreamReader((InputStream) conexao.getContent()));
@@ -42,7 +44,8 @@ public class EnderecoService {
             endereco = new Endereco(locations.get(0).getAsJsonObject());
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Erro("Request Inválido",
+                    "01", HttpStatus.BAD_REQUEST);
         }
         return endereco;
     }

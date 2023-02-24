@@ -3,6 +3,7 @@ package com.marqueserick.api.denuncia.service;
 import com.marqueserick.api.denuncia.dto.DenunciaDto;
 import com.marqueserick.api.denuncia.dto.DenuncianteDto;
 import com.marqueserick.api.denuncia.dto.Endereco;
+import com.marqueserick.api.denuncia.infra.exception.Erro;
 import com.marqueserick.api.denuncia.model.Denuncia;
 import com.marqueserick.api.denuncia.model.Denunciante;
 import com.marqueserick.api.denuncia.model.Ponto;
@@ -10,11 +11,14 @@ import com.marqueserick.api.denuncia.repository.DenunciaRepository;
 import com.marqueserick.api.denuncia.repository.DenuncianteRepository;
 import com.marqueserick.api.denuncia.repository.PontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.marqueserick.api.denuncia.utils.Util.enderecoValido;
 
 @Service
 public class DenunciaService {
@@ -55,7 +59,9 @@ public class DenunciaService {
         List<Ponto> ponto = pontoRepository.findByLatitudeAndLongitude(latitude,longitude);
         if(!ponto.isEmpty()) return ponto.get(0);
 
-        buscarEndereco(latitude, longitude);
+        if(!enderecoValido(buscarEndereco(latitude, longitude))) throw new Erro("Endereço não encontrado para essa localidade",
+                "02", HttpStatus.NOT_FOUND);
+
         Ponto p = new Ponto(latitude, longitude);
         pontoRepository.save(p);
         return p;
