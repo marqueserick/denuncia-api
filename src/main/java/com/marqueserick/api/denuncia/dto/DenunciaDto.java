@@ -1,19 +1,26 @@
 package com.marqueserick.api.denuncia.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.marqueserick.api.denuncia.model.Denuncia;
 
 public class DenunciaDto {
 
+    @JsonView(value = {Views.Resposta.class})
     private Long id;
 
+    @JsonView(value = {Views.Requisicao.class})
     private Double latitude;
 
+    @JsonView(value = {Views.Requisicao.class})
     private Double longitude;
 
+    @JsonView(value = {Views.Requisicao.class})
     private DenuncianteDto denunciante;
 
+    @JsonView(value = {Views.Requisicao.class})
     private Conteudo denuncia;
 
+    @JsonView(value = {Views.Resposta.class})
     private Endereco endereco;
 
     public DenunciaDto(Denuncia denuncia, Endereco endereco) {

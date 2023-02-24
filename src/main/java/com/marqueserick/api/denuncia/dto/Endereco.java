@@ -1,19 +1,26 @@
 package com.marqueserick.api.denuncia.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.google.gson.JsonObject;
 
 public class Endereco {
 
+    @JsonView(value = {Views.Resposta.class})
     private String logradouro;
 
+    @JsonView(value = {Views.Resposta.class})
     private String bairro;
 
+    @JsonView(value = {Views.Resposta.class})
     private String cidade;
 
+    @JsonView(value = {Views.Resposta.class})
     private String estado;
 
+    @JsonView(value = {Views.Resposta.class})
     private String pais;
 
+    //@JsonView(value = {Views.Resposta.class})
     private String cep;
 
     public Endereco(JsonObject enderecoJson) {
