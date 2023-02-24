@@ -2,6 +2,7 @@ package com.marqueserick.api.denuncia.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.marqueserick.api.denuncia.model.Denuncia;
+import com.marqueserick.api.denuncia.model.Denunciante;
 
 public class DenunciaDto {
 
@@ -38,27 +39,47 @@ public class DenunciaDto {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Double getLatitude() {
         return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getLongitude() {
         return longitude;
     }
 
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     public DenuncianteDto getDenunciante() {
         return denunciante;
+    }
+
+    public void setDenunciante(DenuncianteDto denunciante) {
+        this.denunciante = denunciante;
     }
 
     public Conteudo getDenuncia() {
         return denuncia;
     }
 
+    public void setDenuncia(Conteudo denuncia) {
+        this.denuncia = denuncia;
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco){
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 }
